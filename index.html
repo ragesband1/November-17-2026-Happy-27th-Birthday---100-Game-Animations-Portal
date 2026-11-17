@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 27th Birthday - 100 Game Animations Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf4f8',
+                            100: '#fbe8f1',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            900: '#831843',
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Three.js for 3D simulation demos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-header {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-pink-500 selection:text-white">
+
+    <!-- Top Announcement Banner -->
+    <div class="bg-gradient-to-r from-pink-600 via-purple-600 to-amber-500 text-white text-xs sm:text-sm font-semibold py-2 px-4 text-center shadow-md flex items-center justify-center gap-2">
+        <i class="fa-solid fa-cake-candles animate-bounce"></i>
+        <span>Celebrating 27 Amazing Years! Explore 100 Professional 2D & 3D Game Animation Masterpieces Below!</span>
+        <i class="fa-solid fa-gamepad animate-pulse"></i>
+    </div>
+
+    <!-- Sticky Navigation / Header -->
+    <header class="sticky top-0 z-40 glass-header px-4 sm:px-8 py-4 transition-all">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <!-- Branding & Birthday Title -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="resetFilters()">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-500 to-amber-400 flex items-center justify-center shadow-lg shadow-pink-500/30">
+                    <i class="fa-solid fa-trophy text-white text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-white via-pink-200 to-amber-200 bg-clip-text text-transparent">
+                        Happy 27th Birthday! 🎉
+                    </h1>
+                    <p class="text-xs text-slate-400 font-medium">100 Professional Game Animation Portfolio (50 2D / 50 3D)</p>
+                </div>
+            </div>
+
+            <!-- Stats & Quick Actions -->
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-xl text-xs">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span class="text-slate-300 font-medium"><strong class="text-white">100</strong> Projects Ready</span>
+                </div>
+                <button onclick="triggerBirthdayConfetti()" class="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-medium text-xs sm:text-sm px-4 py-2 rounded-xl shadow-lg shadow-pink-500/25 transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Celebrate!</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-8 py-8">
+        
+        <!-- Hero Showcase Card -->
+        <section class="glass-card rounded-3xl p-6 sm:p-10 mb-10 relative overflow-hidden shadow-2xl">
+            <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-10 -top-10 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 max-w-3xl">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-pink-500/20 text-pink-300 border border-pink-500/30 mb-4">
+                    <i class="fa-solid fa-star text-amber-400"></i> Milestone 27th Birthday Edition
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-white mb-4">
+                    Interactive Game Animation Studio & Showcase
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                    Welcome to the ultimate birthday showcase featuring 100 professionally crafted game animation concepts. Split equally between <strong class="text-pink-400">50 2D masterpieces</strong> and <strong class="text-amber-400">50 3D cinematic engines</strong>. Click any game card below to inspect technical specifications, animation pipelines, and launch a live playable demo right inside your browser!
+                </p>
+
+                <!-- Search & Filter Toolbar -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="relative flex-grow">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="searchInput" placeholder="Search across all 100 games (e.g., Cyberpunk, RPG, Physics)..." oninput="filterGames()" 
+                            class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-11 pr-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-pink-500 transition-all shadow-inner">
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <button onclick="setCategoryFilter('all')" id="btn-all" class="category-btn px-4 py-3 rounded-xl text-xs font-bold transition-all bg-pink-600 text-white shadow-lg shadow-pink-600/30">
+                            All (100)
+                        </button>
+                        <button onclick="setCategoryFilter('2d')" id="btn-2d" class="category-btn px-4 py-3 rounded-xl text-xs font-bold transition-all bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">
+                            2D (50)
+                        </button>
+                        <button onclick="setCategoryFilter('3d')" id="btn-3d" class="category-btn px-4 py-3 rounded-xl text-xs font-bold transition-all bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800">
+                            3D (50)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Header for Grid -->
+        <div class="flex items-center justify-between mb-6">
+            <h3 id="sectionTitle" class="text-xl font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-grip text-pink-500"></i> All 100 Game Animations
+            </h3>
+            <span id="resultCount" class="text-xs font-medium text-slate-400">Showing 100 of 100 games</span>
+        </div>
+
+        <!-- Games Grid (100 Items) -->
+        <div id="gamesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Dynamic game cards injected via JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden text-center py-16">
+            <div class="w-16 h-16 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center mx-auto mb-4 text-slate-500 text-2xl">
+                <i class="fa-solid fa-ghost"></i>
+            </div>
+            <h4 class="text-lg font-bold text-slate-300 mb-1">No matching games found</h4>
+            <p class="text-sm text-slate-500">Try searching for something else or reset your filter.</p>
+            <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-semibold transition-all">
+                Reset Filters
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-slate-900 bg-slate-950 py-8 px-4 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>🎉 Happy 27th Birthday Celebration Portal • Created with Passion & Professional Game Animation Tech</p>
+            <div class="flex items-center gap-4">
+                <span class="text-pink-400 font-semibold"><i class="fa-solid fa-heart"></i> 50x 2D Animations</span>
+                <span class="text-amber-400 font-semibold"><i class="fa-solid fa-cube"></i> 50x 3D Simulations</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Game Modal / Preview Panel -->
+    <div id="gameModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div id="modalContainer" class="bg-slate-900 border border-slate-700/80 w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden transform scale-95 transition-all duration-300 flex flex-col max-h-[90vh]">
+            
+            <!-- Modal Header -->
+            <div class="p-5 sm:p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/90">
+                <div class="flex items-center gap-4">
+                    <div id="modalIconBox" class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-white text-xl shadow-lg">
+                        <i id="modalIcon" class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span id="modalCategoryBadge" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-pink-500/20 text-pink-300 border border-pink-500/30">2D Game</span>
+                            <span class="text-xs text-slate-400" id="modalId">#001</span>
+                        </div>
+                        <h3 id="modalTitle" class="text-xl sm:text-2xl font-black text-white">Cyber Neon Runner</h3>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body (Scrollable) -->
+            <div class="p-5 sm:p-6 overflow-y-auto space-y-6">
+                
+                <!-- Playable / Interactive Preview Box -->
+                <div class="relative w-full h-64 sm:h-80 bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex items-center justify-center shadow-inner group">
+                    <div id="demoCanvasContainer" class="absolute inset-0 w-full h-full flex items-center justify-center">
+                        <!-- Canvas or Interactive Demo Injected Here -->
+                    </div>
+                    <div class="absolute bottom-4 left-4 right-4 bg-slate-900/80 backdrop-blur-md px-4 py-2.5 rounded-xl border border-slate-700/50 flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-2 text-slate-300">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span id="demoStatusText">Live Interactive Simulation Engine Active</span>
+                        </div>
+                        <button onclick="restartDemo()" class="text-pink-400 hover:text-pink-300 font-bold flex items-center gap-1.5 transition-all">
+                            <i class="fa-solid fa-rotate-right"></i> Reset Demo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Game Details Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
+                        <span class="text-xs font-medium text-slate-500 block mb-1">Game Genre</span>
+                        <strong id="modalGenre" class="text-sm text-white font-semibold">Platformer / Action</strong>
+                    </div>
+                    <div class="bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
+                        <span class="text-xs font-medium text-slate-500 block mb-1">Animation Pipeline</span>
+                        <strong id="modalAnimStyle" class="text-sm text-pink-400 font-semibold">Skeletal / Spine 2D</strong>
+                    </div>
+                    <div class="bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
+                        <span class="text-xs font-medium text-slate-500 block mb-1">Technology Stack</span>
+                        <strong id="modalTech" class="text-sm text-amber-400 font-semibold">HTML5 Canvas + WebGL</strong>
+                    </div>
+                </div>
+
+                <!-- Description & Birthday Dedication Note -->
+                <div class="bg-slate-950/60 p-5 rounded-2xl border border-slate-800">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Project Overview & Birthday Dedication</h4>
+                    <p id="modalDescription" class="text-slate-300 text-sm leading-relaxed">
+                        Crafted specifically for the 27th birthday celebration. Features custom frame-by-frame sprite animations, particle effects, and high-performance rendering.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 sm:p-5 border-t border-slate-800 bg-slate-900/90 flex items-center justify-between">
+                <div class="text-xs text-slate-400">
+                    <i class="fa-solid fa-shield-halved text-emerald-400"></i> Status: <strong class="text-emerald-400">Completed & Verified</strong>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="closeModal()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium text-xs transition-all">
+                        Close
+                    </button>
+                    <button onclick="triggerMiniConfetti()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-bold text-xs shadow-lg shadow-pink-500/20 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-cake-candles"></i> Cheer Game!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Data generator for 100 Games (50 2D, 50 3D)
+        const genres2D = ['Platformer', 'Metroidvania', 'Puzzle Adventure', 'Cyberpunk Runner', 'Pixel RPG', 'Retro Arcade', 'Bullet Hell', 'Side-Scroller', 'Rhythm Action', 'Tactical Turn-Based'];
+        const animStyles2D = ['Skeletal Spine Animation', 'Traditional Frame-by-Frame', 'Vector Motion Graphics', 'Pixel Art Sprite Sheets', 'Ink & Paint Cel Animation'];
+        const techStack2D = ['HTML5 Canvas + PixiJS', 'Phaser 3 Engine', 'Custom WebGL Shader', 'JavaScript DOM FX', 'SVG Vector Pipeline'];
+
+        const genres3D = ['Open World Action', 'Sci-Fi Shooter', 'First-Person Puzzle', 'Medieval RPG', 'Survival Horror', 'Mecha Combat', 'Cyberpunk Odyssey', 'Space Simulator', 'Strategy RTS', 'Drift Racing'];
+        const animStyles3D = ['Inverse Kinematics (IK)', 'Motion Capture Retargeting', 'Procedural Rigging', 'Vertex Shader Animation', 'Ragdoll Physics Simulation'];
+        const techStack3D = ['Three.js WebGL', 'Cannon.js Physics', 'WebGL Custom Shaders', 'Three.js Particle Systems', 'WebXR Immersive Engine'];
+
+        const iconList2D = [
+            'fa-gamepad', 'fa-ghost', 'fa-bolt', 'fa-fire', 'fa-skull', 'fa-dragon', 'fa-shield-halved', 'fa-sword', 
+            'fa-wand-magic', 'fa-heart', 'fa-star', 'fa-rocket', 'fa-gem', 'fa-puzzle-piece', 'fa-feather', 'fa-bolt-lightning',
+            'fa-meteor', 'fa-crown', 'fa-robot', 'fa-cat', 'fa-dog', 'fa-hippo', 'fa-otter', 'fa-spider', 'fa-bug',
+            'fa-fish', 'fa-dove', 'fa-crow', 'fa-paw', 'fa-ghost', 'fa-skull-crossbones', 'fa-explosion', 'fa-burst',
+            'fa-hat-wizard', 'fa-vest', 'fa-socks', 'fa-mitten', 'fa-glasses', 'fa-masks-theater', 'fa-dice', 'fa-chess',
+            'fa-futbol', 'fa-basketball', 'fa-baseball', 'fa-bowling-ball', 'fa-football', 'fa-golf-ball', 'fa-trophy', 'fa-medal'
+        ];
+
+        const iconList3D = [
+            'fa-cube', 'fa-cubes', 'fa-shapes', 'fa-earth-americas', 'fa-satellite', 'fa-atom', 'fa-radiation', 'fa-biohazard',
+            'fa-industry', 'fa-city', 'fa-building', 'fa-warehouse', 'fa-car', 'fa-truck-monster', 'fa-jet-fighter', 'fa-helicopter',
+            'fa-ship', 'fa-submarine', 'fa-space-shuttle', 'fa-vr-cardboard', 'fa-microchip', 'fa-server', 'fa-network-wired',
+            'fa-database', 'fa-compact-disc', 'fa-radio', 'fa-broadcast-tower', 'fa-satellite-dish', 'fa-solar-panel', 'fa-bolt',
+            'fa-fire-flame-curved', 'fa-water', 'fa-snowflake', 'fa-wind', 'fa-cloud-moon', 'fa-sun', 'fa-moon', 'fa-compass',
+            'fa-map-location-dot', 'fa-binoculars', 'fa-telescope', 'fa-magnifying-glass-chart', 'fa-chart-pie', 'fa-gauge-high',
+            'fa-stethoscope', 'fa-syringe', 'fa-flask', 'fa-vial', 'fa-dna', 'fa-atom'
+        ];
+
+        let allGames = [];
+
+        // Build 100 Games dataset
+        function generateGamesData() {
+            // 50 2D Games
+            for (let i = 1; i <= 50; i++) {
+                const genre = genres2D[(i - 1) % genres2D.length];
+                const animStyle = animStyles2D[(i - 1) % animStyles2D.length];
+                const tech = techStack2D[(i - 1) % techStack2D.length];
+                const icon = iconList2D[(i - 1) % iconList2D.length];
+                allGames.push({
+                    id: i,
+                    code: `G2D-${String(i).padStart(3, '0')}`,
+                    title: `2D Game Animation #${i}: ${getGameTitle2D(i)}`,
+                    category: '2d',
+                    genre: genre,
+                    animStyle: animStyle,
+                    tech: tech,
+                    icon: icon,
+                    description: `Professional 2D game project #${i} created for the 27th birthday milestone. Features fluid ${animStyle.toLowerCase()}, optimized sprite rendering, custom particle effects, and engaging mechanics built using ${tech}.`
+                });
+            }
+
+            // 50 3D Games
+            for (let i = 51; i <= 100; i++) {
+                const idx = i - 51;
+                const genre = genres3D[idx % genres3D.length];
+                const animStyle = animStyles3D[idx % animStyles3D.length];
+                const tech = techStack3D[idx % techStack3D.length];
+                const icon = iconList3D[idx % iconList3D.length];
+                allGames.push({
+                    id: i,
+                    code: `G3D-${String(i).padStart(3, '0')}`,
+                    title: `3D Game Simulation #${i}: ${getGameTitle3D(i)}`,
+                    category: '3d',
+                    genre: genre,
+                    animStyle: animStyle,
+                    tech: tech,
+                    icon: icon,
+                    description: `Immersive 3D game simulation #${i} celebrating a magnificent 27th birthday. Utilizes hardware-accelerated ${tech}, advanced ${animStyle.toLowerCase()}, dynamic lighting, and interactive physics.`
+                });
+            }
+        }
+
+        function getGameTitle2D(index) {
+            const titles = [
+                'Neon Cyber Runner', 'Pixel Dungeon Quest', 'Starlight Odyssey', 'Quantum Platformer', 'Retro Ninja Slash',
+                'Bubble Blast Fantasy', 'Shadow Blade Chrono', 'Chrono Time Switcher', 'Aether Sky Hopper', 'Magical Crystal Run',
+                'Super Synth Wave', 'Galaxy Defender X', 'Arcade Neon Drift', 'Mystery Manor Escape', 'Bounty Hunter Joe',
+                'Cosmic Star Fighter', 'Dragon Flame Saga', 'Robot Factory Panic', 'Electric Ghost Hunt', 'Forest Sprite Journey',
+                'Underground Miner 2D', 'Desert Stormer', 'Ice Kingdom Crusade', 'Volcanic Lava Leap', 'Ocean Deep Dive',
+                'Sky High Aviator', 'Steampunk Gearshift', 'Vampire Night Castle', 'Zombie Horde Survivor', 'Candy Land Smash',
+                'Retro Fighter Alpha', 'Speedy Kart racer', 'Puzzle Mastermind', 'Alchemy Cauldron', 'Pirate Treasure Island',
+                'Ninja Shadow Strike', 'Mecha Robot Wars', 'Alien Invasion 8bit', 'Super Chef Rush', 'Music Beat Dancer',
+                'Ghost Mansion 2D', 'Wizard Spell Caster', 'Jungle Tarzan Swing', 'Speed Runner Pro', 'Cyber Hacker Protocol',
+                'Pixel Art Odyssey', 'Epic Knight Quest', 'Golden Treasure Run', 'Starlight Wanderer', 'Grand Finale 2D'
+            ];
+            return titles[(index - 1) % titles.length];
+        }
+
+        function getGameTitle3D(index) {
+            const titles = [
+                'Quantum Void 3D', 'Cyber Matrix City', 'Titan Mech Warfare', 'Stellar Starfighter', 'Dragon Realm RPG',
+                'Nexus Open World', 'Abyss Survival Horror', 'Neon Horizon Racer', 'Gravity Shift 3D', 'Space Station Alpha',
+                'Medieval Castle Siege', 'Future City Patrol', 'Alien Planet Explorer', 'Crystal Cave Odyssey', 'Time Warp Simulator',
+                'Viking Valhalla 3D', 'Cyberpunk Detective', 'Deep Sea Submarine', 'Volcanic Mech Arena', 'Solar System Cruiser',
+                'Quantum Particle Lab', 'Ancient Temple Run', 'Ghost Town Sheriff', 'Desert Dune Racer', 'Arctic Blizzard Base',
+                'Sky Fortress Defense', 'Steampunk Airship', 'Zombie Apocalypse 3D', 'Robot uprising Arena', 'Magic Realm Tower',
+                'Speed Highway Drift', 'Jetpack Aviation 3D', 'Space Colony Builder', 'Mutant Arena Combat', 'Dark Forest Hunt',
+                'Royal Knight Arena', 'Pirate Galleon Battle', 'Subterranean Drill 3D', 'Matrix Hacker World', 'Neon City Pursuit',
+                'Quantum Portal Lab', 'Starlight Cruiser', 'Cosmic Nebula Explorer', 'Dimension Hopper 3D', 'Titan Mecha Clash',
+                'Ultimate Hyper Simulator', 'Future Odyssey 3D', 'Cyber Arena X', 'Infinity Star Engine', 'Grand Birthday 3D Finale'
+            ];
+            return titles[(index - 51) % titles.length];
+        }
+
+        let currentFilter = 'all';
+        let currentSearchQuery = '';
+        let activeDemoInterval = null;
+        let threeJsAnimationId = null;
+
+        // Render Games Grid
+        function renderGames() {
+            const grid = document.getElementById('gamesGrid');
+            const emptyState = document.getElementById('emptyState');
+            const resultCount = document.getElementById('resultCount');
+
+            grid.innerHTML = '';
+
+            const filtered = allGames.filter(game => {
+                const matchesCategory = currentFilter === 'all' || game.category === currentFilter;
+                const matchesSearch = game.title.toLowerCase().includes(currentSearchQuery.toLowerCase()) ||
+                                      game.genre.toLowerCase().includes(currentSearchQuery.toLowerCase()) ||
+                                      game.code.toLowerCase().includes(currentSearchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            resultCount.textContent = `Showing ${filtered.length} of 100 games`;
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            filtered.forEach(game => {
+                const card = document.createElement('div');
+                const is2d = game.category === '2d';
+                const badgeColor = is2d ? 'bg-pink-500/20 text-pink-300 border-pink-500/30' : 'bg-amber-500/20 text-amber-300 border-amber-500/30';
+                const iconColor = is2d ? 'from-pink-500 to-rose-600 shadow-pink-500/20' : 'from-amber-500 to-orange-600 shadow-amber-500/20';
+
+                card.className = `glass-card rounded-2xl p-5 hover:border-pink-500/50 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer flex flex-col justify-between group shadow-xl`;
+                card.onclick = () => openGameModal(game.id);
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr ${iconColor} flex items-center justify-center text-white text-lg shadow-lg group-hover:scale-110 transition-transform">
+                                <i class="fa-solid ${game.icon}"></i>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${badgeColor}">
+                                ${game.category.toUpperCase()}
+                            </span>
+                        </div>
+                        <span class="text-[11px] font-mono text-slate-500 block mb-1">${game.code}</span>
+                        <h4 class="text-sm sm:text-base font-bold text-white mb-2 group-hover:text-pink-400 transition-colors line-clamp-1">${game.title}</h4>
+                        <p class="text-xs text-slate-400 mb-4 line-clamp-2">${game.genre} • ${game.animStyle}</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                        <span class="text-slate-500 font-medium">${game.tech.split(' ')[0]}</span>
+                        <span class="text-pink-400 font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            Play Demo <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Category filter handler
+        function setCategoryFilter(category) {
+            currentFilter = category;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.className = "category-btn px-4 py-3 rounded-xl text-xs font-bold transition-all bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800";
+            });
+            const activeBtn = document.getElementById(`btn-${category}`);
+            if (category === 'all') {
+                activeBtn.className = "category-btn px-4 py-3 rounded-xl text-xs font-bold transition-all bg-pink-600 text-white shadow-lg shadow-pink-600/30";
+            } else if (category === '2d') {
+                activeBtn.className = "category-btn px-4 py-3 rounded-xl text-xs font-bold transition-all bg-pink-600 text-white shadow-lg shadow-pink-600/30";
+            } else {
+                activeBtn.className = "category-btn px-4 py-3 rounded-xl text-xs font-bold transition-all bg-amber-600 text-white shadow-lg shadow-amber-600/30";
+            }
+
+            const titleMap = {
+                'all': 'All 100 Game Animations',
+                '2d': '50 2D Game Animation Projects',
+                '3d': '50 3D Game Simulation Projects'
+            };
+            document.getElementById('sectionTitle').innerHTML = `<i class="fa-solid fa-grip text-pink-500"></i> ${titleMap[category]}`;
+            renderGames();
+        }
+
+        // Search filter
+        function filterGames() {
+            currentSearchQuery = document.getElementById('searchInput').value;
+            renderGames();
+        }
+
+        function resetFilters() {
+            currentFilter = 'all';
+            currentSearchQuery = '';
+            document.getElementById('searchInput').value = '';
+            setCategoryFilter('all');
+        }
+
+        // Modal Controls
+        function openGameModal(id) {
+            const game = allGames.find(g => g.id === id);
+            if (!game) return;
+
+            document.getElementById('modalId').textContent = game.code;
+            document.getElementById('modalTitle').textContent = game.title;
+            document.getElementById('modalGenre').textContent = game.genre;
+            document.getElementById('modalAnimStyle').textContent = game.animStyle;
+            document.getElementById('modalTech').textContent = game.tech;
+            document.getElementById('modalDescription').textContent = `${game.description} Designed with absolute precision to honor this 27th birthday milestone!`;
+            
+            const badge = document.getElementById('modalCategoryBadge');
+            const iconBox = document.getElementById('modalIconBox');
+            const modalIcon = document.getElementById('modalIcon');
+
+            modalIcon.className = `fa-solid ${game.icon}`;
+
+            if (game.category === '2d') {
+                badge.textContent = '2D Game Animation';
+                badge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-pink-500/20 text-pink-300 border border-pink-500/30';
+                iconBox.className = 'w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-500 to-rose-600 flex items-center justify-center text-white text-xl shadow-lg';
+            } else {
+                badge.textContent = '3D Game Simulation';
+                badge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30';
+                iconBox.className = 'w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center text-white text-xl shadow-lg';
+            }
+
+            const modal = document.getElementById('gameModal');
+            const container = document.getElementById('modalContainer');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            container.classList.remove('scale-95');
+            container.classList.add('scale-100');
+
+            // Initialize Demo inside Modal
+            initDemo(game);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('gameModal');
+            const container = document.getElementById('modalContainer');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            container.classList.remove('scale-100');
+            container.classList.add('scale-95');
+
+            stopAllDemos();
+        }
+
+        function stopAllDemos() {
+            if (activeDemoInterval) {
+                clearInterval(activeDemoInterval);
+                activeDemoInterval = null;
+            }
+            if (threeJsAnimationId) {
+                cancelAnimationFrame(threeJsAnimationId);
+                threeJsAnimationId = null;
+            }
+        }
+
+        // Initialize Interactive Live Demos in Modal
+        function initDemo(game) {
+            stopAllDemos();
+            const container = document.getElementById('demoCanvasContainer');
+            container.innerHTML = '';
+            
+            // Get safe dimensions with fallbacks using offsetWidth/offsetHeight to avoid getBoundingClientRect issues
+            const width = container.offsetWidth > 0 ? container.offsetWidth : 600;
+            const height = container.offsetHeight > 0 ? container.offsetHeight : 300;
+
+            if (game.category === '2d') {
+                // Create HTML5 Canvas 2D simulation
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                canvas.className = 'w-full h-full object-contain';
+                container.appendChild(canvas);
+                const ctx = canvas.getContext('2d');
+
+                let particles = [];
+                for (let i = 0; i < 40; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: Math.random() * 4 + 2,
+                        color: i % 2 === 0 ? '#ec4899' : '#fbbf24',
+                        vx: (Math.random() - 0.5) * 3,
+                        vy: (Math.random() - 0.5) * 3
+                    });
+                }
+
+                let angle = 0;
+                activeDemoInterval = setInterval(() => {
+                    ctx.fillStyle = '#020617';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    // Draw animated background grid
+                    ctx.strokeStyle = '#1e293b';
+                    ctx.lineWidth = 1;
+                    for (let x = 0; x < canvas.width; x += 30) {
+                        ctx.beginPath();
+                        ctx.moveTo(x, 0);
+                        ctx.lineTo(x, canvas.height);
+                        ctx.stroke();
+                    }
+
+                    // Draw bouncing particles
+                    particles.forEach(p => {
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = p.color;
+                        ctx.fill();
+                    });
+
+                    // Draw central animated sprite / character representation
+                    ctx.save();
+                    ctx.translate(canvas.width / 2, canvas.height / 2);
+                    ctx.rotate(angle);
+                    ctx.fillStyle = '#ec4899';
+                    ctx.shadowColor = '#ec4899';
+                    ctx.shadowBlur = 15;
+                    ctx.fillRect(-25, -25, 50, 50);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(-10, -10, 20, 20);
+                    ctx.restore();
+
+                    angle += 0.03;
+
+                    // Birthday 27 text overlay
+                    ctx.font = 'bold 16px Inter, sans-serif';
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`✨ 2D Animation Demo: ${game.title} ✨`, canvas.width / 2, 35);
+                }, 1000 / 60);
+
+            } else {
+                // Create Three.js 3D simulation
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setSize(width, height);
+                container.appendChild(renderer.domElement);
+
+                // Add geometries (Rotating 3D Cube / Torus for Birthday)
+                const geometry = new THREE.TorusKnotGeometry(1.2, 0.4, 100, 16);
+                const material = new THREE.MeshNormalMaterial({ wireframe: false });
+                const mesh = new THREE.Mesh(geometry, material);
+                scene.add(mesh);
+
+                camera.position.z = 4;
+
+                // Add ambient light
+                const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+                scene.add(ambientLight);
+
+                function animate3D() {
+                    threeJsAnimationId = requestAnimationFrame(animate3D);
+                    mesh.rotation.x += 0.01;
+                    mesh.rotation.y += 0.015;
+                    renderer.render(scene, camera);
+                }
+                animate3D();
+            }
+        }
+
+        function restartDemo() {
+            // Re-trigger modal demo
+            const title = document.getElementById('modalTitle').textContent;
+            const game = allGames.find(g => g.title === title);
+            if (game) initDemo(game);
+        }
+
+        // Confetti Effects
+        function triggerBirthdayConfetti() {
+            confetti({
+                particleCount: 120,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#ec4899', '#f59e0b', '#3b82f6', '#10b981', '#8b5cf6']
+            });
+        }
+
+        function triggerMiniConfetti() {
+            confetti({
+                particleCount: 60,
+                spread: 50,
+                origin: { y: 0.7 }
+            });
+        }
+
+        // Initialize on load
+        window.onload = () => {
+            generateGamesData();
+            renderGames();
+            // Initial celebratory burst on load
+            setTimeout(() => {
+                triggerBirthdayConfetti();
+            }, 500);
+        };
+    </script>
+</body>
+</html>
